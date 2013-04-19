@@ -32,6 +32,47 @@ public class PassengerTest {
 		Passenger adult = new Adult();
 		
 		//When
+		adult.addVehicle(new Bus(new Point(0, 0), new Point(0, 20)));
+		adult.addVehicle(new Bus_Town(adult));
+		double fee = adult.calcFee();
+		//Then
+		
+		assertEquals(1100, fee, 0);
+	}
+	@Test
+	public void testAdultBusBus_Metro() throws Exception {
+		//Given
+		Passenger adult = new Adult();
+		
+		//When
+		adult.addVehicle(new Bus(new Point(0, 0), new Point(0, 20)));
+		adult.addVehicle(new Bus_Metro(adult));
+		double fee = adult.calcFee();
+		//Then
+		
+		assertEquals(1900, fee, 0);
+	}
+	@Test
+	public void testYoungBus_TownBus_Metro() throws Exception {
+		//Given
+		Passenger young = new YoungAdult();
+		//When
+		young.addVehicle(new Bus_Town(young));
+		young.addVehicle(new Bus_Metro(young));
+		double fee = young.calcFee();
+		//Then
+		assertEquals(1700, fee, 0);
+	}
+		//Given
+	
+	
+	/*
+	@Test
+	public void testAdultDefaultFee() throws Exception {
+		//Given
+		Passenger adult = new Adult();
+		
+		//When
 		adult.addVehicle(new Bus());
 		adult.addVehicle(new Subway(new Point(0, 0), new Point(0, 10)));
 		
@@ -109,5 +150,5 @@ public class PassengerTest {
 		//When
 		//Then
 	}
-
+*/
 }
