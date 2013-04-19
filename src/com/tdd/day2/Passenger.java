@@ -1,7 +1,9 @@
 package com.tdd.day2;
 
+import java.util.ArrayList;
+
 public abstract class Passenger {
-	private Point start;
+//	private Point start;
 	private double fee;
 	
 	public double getFee() {
@@ -12,14 +14,6 @@ public abstract class Passenger {
 		this.fee = fee;
 	}
 
-	public Point getStart() {
-		return start;
-	}
-
-	public void setStart(Point start) {
-		this.start = start;
-	}
-
 	public Point getEnd() {
 		return end;
 	}
@@ -28,19 +22,27 @@ public abstract class Passenger {
 		this.end = end;
 	}
 
-	public Vehicle getVehicle() {
-		return vehicle;
+	public ArrayList getVehicle() {
+		return vehicles;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setVehicle(ArrayList vehicle) {
+		this.vehicles = vehicle;
+	}
+	
+	public void addVehicle(Vehicle vehicle) {
+		this.vehicles.add(vehicle);
 	}
 
 	private Point end;
-	private Vehicle vehicle;
+	private ArrayList vehicles = new ArrayList();
 	
 	public double calcFee() {
-		return this.fee + vehicle.getDistanceFee(start.getDistance(end));
+		double totalFee = 0.0;
+		for (int i = 0; i < this.vehicles.size(); i++) {
+			totalFee += ((Vehicle)this.vehicles.get(i)).getDistanceFee();
+		}
+		return totalFee + this.getFee();
 	}
 	
 }

@@ -32,9 +32,9 @@ public class PassengerTest {
 		Passenger adult = new Adult();
 		
 		//When
-		adult.setStart(new Point(0, 0));
-		adult.setEnd(new Point(0, 10));
-		adult.setVehicle(new Bus());
+		adult.addVehicle(new Bus());
+		adult.addVehicle(new Subway(new Point(0, 0), new Point(0, 10)));
+		
 		double fee = adult.calcFee();
 		//Then
 		
@@ -47,9 +47,8 @@ public class PassengerTest {
 		Passenger adult = new Adult();
 
 		//When
-		adult.setStart(new Point(0, 0));
-		adult.setEnd(new Point(0, 30));
-		adult.setVehicle(new Subway());
+		adult.addVehicle(new Bus());
+		adult.addVehicle(new Subway(new Point(0, 0), new Point(0, 30)));
 		double fee = adult.calcFee();
 		//Then
 		assertEquals(1300, fee, 0);
@@ -61,9 +60,8 @@ public class PassengerTest {
 		Passenger young = new YoungAdult();
 
 		//When
-		young.setStart(new Point(0, 0));
-		young.setEnd(new Point(0, 10));
-		young.setVehicle(new Subway());
+		young.addVehicle(new Bus());
+		young.addVehicle(new Subway(new Point(0, 0), new Point(0, 10)));
 		double fee = young.calcFee();
 		//Then
 		assertEquals(720, fee, 0);
@@ -75,13 +73,34 @@ public class PassengerTest {
 		Passenger young = new YoungAdult();
 
 		//When
-		young.setStart(new Point(0, 0));
-		young.setEnd(new Point(0, 30));
-		young.setVehicle(new Subway());
+		young.addVehicle(new Bus());
+		young.addVehicle(new Subway(new Point(0, 0), new Point(0, 30)));
 		double fee = young.calcFee();
 		//Then
-		assertEquals(1300, fee, 0);
+		assertEquals(1120, fee, 0);
 	}
+	
+	@Test
+	public void testAdultBusBus() throws Exception {
+		//Given
+		Passenger adult = new Adult();
+		//When
+		adult.addVehicle(new Bus());
+		adult.addVehicle(new Bus());
+		//Then
+		assertEquals(900, adult.calcFee(), 0);
+	}
+	@Test
+	public void testAdultSubwaySubway() throws Exception {
+		//Given
+		Passenger adult = new Adult();
+		//When
+		adult.addVehicle(new Subway(new Point(0, 0), new Point(0, 20)));
+		adult.addVehicle(new Subway(new Point(0, 20), new Point(0, 80)));
+		//Then
+		assertEquals(1900, adult.calcFee(), 0);
+	}
+	
 	
 	@Test
 	public void testTransportAdult() throws Exception {

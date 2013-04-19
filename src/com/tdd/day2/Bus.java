@@ -1,9 +1,12 @@
 package com.tdd.day2;
 
-public class Bus implements Vehicle {
-
+public class Bus extends Vehicle {
+	
+	public Bus() {
+	
+	}
 	@Override
-	public double getDistanceFee(double distance) {
+	public double getDistanceFee() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
